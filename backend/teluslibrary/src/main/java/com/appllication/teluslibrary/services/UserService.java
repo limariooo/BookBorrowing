@@ -16,6 +16,11 @@ import com.appllication.teluslibrary.payload.CreateUserDto;
 import com.appllication.teluslibrary.payload.LoanDto;
 import com.appllication.teluslibrary.payload.UserDto;
 import com.appllication.teluslibrary.repositories.UserRepository;
+
+import lombok.Getter;
+import lombok.Setter;
+@Setter
+@Getter
 @Service
 public class UserService {
 	@Autowired
@@ -57,8 +62,9 @@ public class UserService {
 		User user = mapper.map(userDto, User.class);
 		return user;
 	}
-	private UserDto mapUserToDto(User user) {
+	public UserDto mapUserToDto(User user) {
 		UserDto userDto = mapper.map(user, UserDto.class);
+		
 		if(user.getLoans() != null) {
 			userDto.setActiveLoans(loanService.getActiveLoans(user.getLoans()));
 			userDto.setLoans(user.getLoans().stream()
