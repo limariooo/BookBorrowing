@@ -18,10 +18,14 @@ import com.appllication.teluslibrary.payload.CreateUserDto;
 import com.appllication.teluslibrary.payload.UserDto;
 import com.appllication.teluslibrary.services.UserService;
 
+import lombok.Setter;
+
 @RestController
+@Setter
 public class UserController {
 	@Autowired
 	UserService us;
+	
 	@GetMapping("/users")
 	public List<UserDto> getUsers(){
 		return us.getUsers();

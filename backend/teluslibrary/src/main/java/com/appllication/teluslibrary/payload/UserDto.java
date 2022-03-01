@@ -5,15 +5,15 @@ import lombok.Data;
 
 @Data
 public class UserDto {
-	public Long id;
+	private Long id;
 	
-	public String firstName;
+	private String firstName;
 	
-	public String lastName;
+	private String lastName;
 	
 	private String email;
 	
 	private Integer activeLoans;
 	
-	public List<LoanDto> loans;
+	private List<LoanDto> loans;
 }

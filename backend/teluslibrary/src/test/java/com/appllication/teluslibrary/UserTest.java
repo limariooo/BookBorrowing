@@ -40,18 +40,19 @@ public class UserTest {
 	@Test
 	void getUser() {
 		
-		User user = new User();
+		UserDto user = new UserDto();
 		user.setFirstName("Pancho");
 		user.setLastName("Ramirez");
 		user.setEmail("pancho@mail.com");
 		user.setId(20L);
 		
 		UserService userServiceMock = mock(UserService.class);
-		Mockito.when(userServiceMock.getUser(20L)).thenReturn(userService.mapUserToDto(user));
+		this.userController.setUs(userServiceMock);
+		Mockito.when(userServiceMock.getUser(20L)).thenReturn(user);
 		
-		UserDto tmp_user = userController.getUser(20L).getBody();
+		UserDto resultUser = userController.getUser(20L).getBody();
 		
-		MatcherAssert.assertThat(tmp_user.id, equalTo(20L));
+		MatcherAssert.assertThat(resultUser.getId(), equalTo(20L));
 	}
 	
 	//Get All users
