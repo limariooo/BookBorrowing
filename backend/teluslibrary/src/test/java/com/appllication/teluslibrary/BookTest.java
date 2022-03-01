@@ -63,6 +63,7 @@ public class BookTest {
         BookService bookServiceMock = mock(BookService.class);
         Mockito.when(bookServiceMock.getBook(1L)).thenReturn(bookService.mapBookToDto(book));
 
+        
         BookDto tmp_book = bookController.getBook(1L).getBody();
 
         MatcherAssert.assertThat(tmp_book.id, equalTo(1L));

@@ -1,8 +1,8 @@
 package com.appllication.teluslibrary.payload;
 
 import java.util.List;
-
 import lombok.Data;
+
 @Data
 public class UserDto {
 	public Long id;
