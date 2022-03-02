@@ -23,8 +23,6 @@ import lombok.Setter;
 @Entity
 @Table(name="USER",uniqueConstraints={@UniqueConstraint(columnNames={"email"})})
 public class User {
-
-	
 	
 	public Long getId() {
 		return id;

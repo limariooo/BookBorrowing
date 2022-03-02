@@ -62,6 +62,7 @@ public class UserService {
 		User user = mapper.map(userDto, User.class);
 		return user;
 	}
+	
 	public UserDto mapUserToDto(User user) {
 		UserDto userDto = mapper.map(user, UserDto.class);
 		

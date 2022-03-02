@@ -9,6 +9,7 @@ import lombok.Setter;
 @Setter
 @Data
 public class CreateLoanDto {
-	private Long bookId;
-	private Long userId;
+	public Long bookId;
+	public Long userId;
+	public Long id;
 }

@@ -51,7 +51,7 @@ public class BookTest {
 
   // Get Book by ID
   @Test
-  void getBook() {
+  void getBookById() {
 
     Book book = new Book();
     book.setId(1L);

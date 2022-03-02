@@ -30,10 +30,16 @@ public class UserController {
 	public List<UserDto> getUsers(){
 		return us.getUsers();
 	}
+	/*
 	@PostMapping("/users")
 	public UserDto createUser(@RequestBody CreateUserDto userDto) {
 		return us.createUser(userDto);
+	}*/
+	@PostMapping("/users")
+	public ResponseEntity<UserDto> createUser(@RequestBody CreateUserDto userDto){
+		return new ResponseEntity<>(us.createUser(userDto), HttpStatus.CREATED);
 	}
+	
 	@PutMapping("/users")
 	public UserDto updateUser(@RequestBody User user) {
 		return us.updateUser(user);

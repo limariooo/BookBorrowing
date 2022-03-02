@@ -5,6 +5,7 @@ import static org.mockito.Mockito.mock;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Test;
@@ -36,7 +37,7 @@ public class UserTest {
 	@Autowired
 	private UserController userController;
 	
-	//Get Users
+	//Controllers
 	@Test
 	void getUser() {
 		
@@ -55,15 +56,14 @@ public class UserTest {
 		MatcherAssert.assertThat(resultUser.getId(), equalTo(20L));
 	}
 	
-	//Get All users
+	
+	//Get All Users Error linea 50
 	/*
 	@Test
-	void getAllUsers(){
-		
+	void getAllUser() {
 		List<User> Catalog = userRepository.findAll();
 		
 		UserService userServiceMock = mock(UserService.class);
-		//this.userController.setUs(userServiceMock);
 		Mockito.when(userServiceMock.getUsers()).thenReturn(new ArrayList<UserDto>());
 		
 		List<UserDto> tmp_user = userController.getUsers();
@@ -71,10 +71,60 @@ public class UserTest {
 		MatcherAssert.assertThat(tmp_user.size(), equalTo(Catalog.size()));
 	}
 	*/
+
+	
 	//Create User
 	/*
 	@Test
 	void createUser() {
+		User user = new User();
+		user.setFirstName("Mariana");
+		user.setLastName("Gonzalez");
+		user.setEmail("mariana2@mail.com");
+		
+		CreateUserDto tmp = new CreateUserDto();
+		tmp.firstName = "Mariana";
+		tmp.lastName = "Gonzalez";
+		tmp.email = "maria@mail.com";
+		
+		UserService userServiceMock = mock(UserService.class);
+		Mockito.when(userServiceMock.createUser(tmp)).thenReturn(userService.mapUserToDto(user));
+		
+		UserDto tmp_user = userController.createUser(tmp).getBody();
+		
+		MatcherAssert.assertThat(tmp_user.firstName, equalTo("Mariana"));
+	}
+	*/
+	
+	//GetUsersService
+	/* Error Mapping ModelMapper 
+	@Test
+	void getUser_Service() {
+		List<User> catalog = userRepository.findAll();
+		
+		UserRepository usRepo = mock(UserRepository.class);
+		Mockito.when(usRepo.findAll()).thenReturn(catalog);
+		
+		List<UserDto> tmp_user = userService.getUsers();//Mapping ModelMapper
+		
+		MatcherAssert.assertThat(tmp_user.size(), equalTo(catalog.size()));
+	}
+	*/
+	
+	//Update user
+	/*
+	@Test
+	void updateUser() {
+		
+	}
+	*/
+	
+	//Delete user
+	
+	
+	//Create User with Service	
+	@Test
+	void createUser_Service() {
 		
 		User user = new User();
 		user.setFirstName("Matheo");
@@ -86,15 +136,50 @@ public class UserTest {
 		tmp.lastName = "Nuñez";
 		tmp.email = "matheo@mail.com";
 		
-		UserService userServiceMock = mock(UserService.class);
-		this.userController.setUs(userServiceMock);
-		Mockito.when(userServiceMock.createUser(tmp)).thenReturn(userService.mapUserToDto(user));
+		UserRepository usRepo = mock(UserRepository.class);
+		//this.userController.setUs(userServiceMock);
+		Mockito.when(usRepo.save(user)).thenReturn(user);
 		
-		UserDto tmp_user = userController.createUser(tmp);
+		UserDto tmp_user = userService.createUser(tmp);
 		
 		MatcherAssert.assertThat(tmp_user.email, equalTo("matheo@mail.com"));
-		
-		
 	}
-	*/
+	
+	//Get User by Id
+	@Test
+	void getUser_ID_Service() {
+		User user = new User();
+		user.setFirstName("Mateo");
+		user.setLastName("Calderon");
+		user.setEmail("ca@mail.com");
+		user.setId(12L);
+		
+		UserRepository usRepo = mock(UserRepository.class);
+		Mockito.when(usRepo.findById(12L)).thenReturn(Optional.of(user));
+		
+		UserDto tmp_user = userService.getUser(12L);
+		
+		MatcherAssert.assertThat(tmp_user.id, equalTo(12L));
+	}
+	
+	@Test
+	void findById() {
+		User user = userRepository.findById(15L).get();
+		MatcherAssert.assertThat(user.getId(), equalTo(15L));
+	}
+	
+	@Test
+	void save() {
+		User user = new User();
+		user.setFirstName("Saul");
+		user.setLastName("Gimenez");
+		user.setEmail("saul@mail.com");
+		
+		User tmp = userRepository.save(user);
+		MatcherAssert.assertThat(tmp.getEmail(), equalTo("saul@mail.com"));
+	}
+	
+	
+	
+	
 }
