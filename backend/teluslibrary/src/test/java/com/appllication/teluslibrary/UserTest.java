@@ -63,6 +63,7 @@ public class UserTest {
 		List<User> Catalog = userRepository.findAll();
 		
 		UserService userServiceMock = mock(UserService.class);
+		//this.userController.setUs(userServiceMock);
 		Mockito.when(userServiceMock.getUsers()).thenReturn(new ArrayList<UserDto>());
 		
 		List<UserDto> tmp_user = userController.getUsers();
@@ -70,7 +71,6 @@ public class UserTest {
 		MatcherAssert.assertThat(tmp_user.size(), equalTo(Catalog.size()));
 	}
 	*/
-	
 	//Create User
 	/*
 	@Test
@@ -87,14 +87,14 @@ public class UserTest {
 		tmp.email = "matheo@mail.com";
 		
 		UserService userServiceMock = mock(UserService.class);
+		this.userController.setUs(userServiceMock);
 		Mockito.when(userServiceMock.createUser(tmp)).thenReturn(userService.mapUserToDto(user));
 		
-		UserDto tmp_user = userController.createUser(tmp).getBody();
+		UserDto tmp_user = userController.createUser(tmp);
 		
 		MatcherAssert.assertThat(tmp_user.email, equalTo("matheo@mail.com"));
 		
 		
 	}
 	*/
-	
 }
