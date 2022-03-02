@@ -47,6 +47,20 @@ public class UserTest {
 	
 	//Controllers
 	
+	//Get All User
+	@Test
+	void getAllUser() {
+		List<User> Catalog = new ArrayList<>();
+		
+		UserService userServiceMock = mock(UserService.class);
+		this.userController.setUs(userServiceMock);
+		Mockito.when(userServiceMock.getUsers()).thenReturn(new ArrayList<UserDto>());
+		
+		List<UserDto> tmp_user = userController.getUsers();
+		
+		MatcherAssert.assertThat(tmp_user.size(), equalTo(Catalog.size()));
+	}
+	
 	@Test
 	void getUser() {
 		
@@ -65,26 +79,7 @@ public class UserTest {
 		MatcherAssert.assertThat(resultUser.getId(), equalTo(20L));
 	}
 	
-	
-	//Get All User
-	
-	@Test
-	void getAllUser() {
-		List<User> Catalog = new ArrayList<>();
-		
-		UserService userServiceMock = mock(UserService.class);
-		this.userController.setUs(userServiceMock);
-		Mockito.when(userServiceMock.getUsers()).thenReturn(new ArrayList<UserDto>());
-		
-		List<UserDto> tmp_user = userController.getUsers();
-		
-		MatcherAssert.assertThat(tmp_user.size(), equalTo(Catalog.size()));
-	}
-	
-
-	
 	//Create User
-	
 	@Test
 	void createUser() {
 		User user = new User();
@@ -107,25 +102,7 @@ public class UserTest {
 	}
 	
 	
-	//GetUsersService
-	//LastOne
-	/*
-	@Test
-	void getUser_Service() {
-		List<User> catalog = new ArrayList<User>();
-		
-		UserRepository usRepo = mock(UserRepository.class);
-		//this.userService.setUs(usRepo);
-		Mockito.when(usRepo.findAll()).thenReturn(catalog);
-		
-		List<UserDto> tmp_user = userService.getUsers();//Mapping ModelMapper
-		
-		MatcherAssert.assertThat(tmp_user.size(), equalTo(catalog.size()));
-	}
-	
-	*/
-	//Update user
-	
+	//Update User
 	@Test
 	void updateUser() {
 		
@@ -149,8 +126,7 @@ public class UserTest {
 		
 	}
 	
-	
-	//Delete user
+	//Delete User
 	@Test
 	void deleteUser() {
 		User user = new User();
@@ -169,6 +145,40 @@ public class UserTest {
 		MatcherAssert.assertThat(tmp_user, equalTo(new ResponseEntity<>("User deleted successfully", HttpStatus.OK)));
 	}
 	
+	//GetUsersService
+	//LastOne
+	/*
+	@Test
+	void getUser_Service() {
+		List<User> catalog = new ArrayList<User>();
+		
+		UserRepository usRepo = mock(UserRepository.class);
+		//this.userService.setUs(usRepo);
+		Mockito.when(usRepo.findAll()).thenReturn(catalog);
+		
+		List<UserDto> tmp_user = userService.getUsers();//Mapping ModelMapper
+		
+		MatcherAssert.assertThat(tmp_user.size(), equalTo(catalog.size()));
+	}
+	
+	*/
+	
+	//Get User by Id
+	@Test
+	void getUser_ID_Service() {
+		User user = new User();
+		user.setFirstName("Mateo");
+		user.setLastName("Calderon");
+		user.setEmail("ca@mail.com");
+		user.setId(12L);
+		
+		UserRepository usRepo = mock(UserRepository.class);
+		Mockito.when(usRepo.findById(12L)).thenReturn(Optional.of(user));
+		
+		UserDto tmp_user = userService.getUser(12L);
+		
+		MatcherAssert.assertThat(tmp_user.id, equalTo(12L));
+	}
 	
 	//Create User with Service	
 	@Test
@@ -191,23 +201,49 @@ public class UserTest {
 		UserDto tmp_user = userService.createUser(tmp);
 		
 		MatcherAssert.assertThat(tmp_user.email, equalTo("matheo@mail.com"));
-	}
+	}	
 	
-	//Get User by Id
+	//Update User
 	@Test
-	void getUser_ID_Service() {
+	void updateUser_Service() {
+		
 		User user = new User();
-		user.setFirstName("Mateo");
-		user.setLastName("Calderon");
-		user.setEmail("ca@mail.com");
-		user.setId(12L);
+		user.setFirstName("Lorena");
+		user.setLastName("Giron");
+		user.setEmail("lo@mail.com");
 		
-		UserRepository usRepo = mock(UserRepository.class);
-		Mockito.when(usRepo.findById(12L)).thenReturn(Optional.of(user));
+		UpdateUserDto tmp = new UpdateUserDto();
+		tmp.firstName = "Laura";
+		tmp.lastName = "Giron";
+		user.setEmail("lo@mail.com");
 		
-		UserDto tmp_user = userService.getUser(12L);
+		UserRepository usMock = mock(UserRepository.class);
+		//this.userService.setUs(usMock);
+		Mockito.when(usMock.save(user)).thenReturn(user);
 		
-		MatcherAssert.assertThat(tmp_user.id, equalTo(12L));
+		UserDto tmp_user = userService.updateUser(user);
+		
+		MatcherAssert.assertThat(tmp_user.firstName, equalTo("Lorena"));
+	}
+		
+	//Delete user
+	@Test
+	void deleteUser_Service() {
+		
+		User user = new User();
+		user.setFirstName("Mario");
+		user.setLastName("Gonzalez");
+		user.setEmail("ma@mail.com");
+		user.setId(25L);
+		
+		UserRepository usMock = mock(UserRepository.class);
+		//this.userService.setUs(usMock);
+		Mockito.when(usMock.save(user)).thenReturn(user);
+		
+		ResponseEntity<String> tmp_user = userService.deleteUser(25L);
+		
+		MatcherAssert.assertThat(tmp_user, equalTo(new ResponseEntity<>("User deleted successfully", HttpStatus.OK)));
+		
 	}
 	
 	@Test
@@ -215,7 +251,6 @@ public class UserTest {
 		User user = userRepository.findById(15L).get();
 		MatcherAssert.assertThat(user.getId(), equalTo(15L));
 	}
-	
 	
 	@Test
 	void save() {
