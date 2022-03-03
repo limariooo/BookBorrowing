@@ -44,53 +44,7 @@ public class Loan {
 	@JoinColumn(name = "fk_id_book", nullable = false)
 	private Book book;
 
-	public Long getCorrelative() {
-		return correlative;
-	}
 
-	public void setCorrelative(Long correlative) {
-		this.correlative = correlative;
-	}
-
-	public LocalDate getStartDate() {
-		return startDate;
-	}
-
-	public void setStartDate(LocalDate startDate) {
-		this.startDate = startDate;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	public Book getBook() {
-		return book;
-	}
-
-	public void setBook(Book book) {
-		this.book = book;
-	}
 
 	public Loan(Long correlative, LocalDate startDate, String type, String status, User user, Book book) {
 		super();

@@ -147,7 +147,7 @@ public class UserTest {
 	
 	//GetUsersService
 	//LastOne
-	
+	/*
 	@Test
 	void getUser_Service() {
 		List<User> catalog = new ArrayList<User>();
@@ -160,7 +160,7 @@ public class UserTest {
 		
 		MatcherAssert.assertThat(tmp_user.size(), equalTo(catalog.size()));
 	}
-	
+	*/
 	
 	
 	//Get User by Id
