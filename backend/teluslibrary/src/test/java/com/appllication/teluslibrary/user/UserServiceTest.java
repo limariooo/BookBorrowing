@@ -35,6 +35,7 @@ import com.appllication.teluslibrary.services.UserService;
 @SpringBootTest(classes = TeluslibraryApplication.class)
 public class UserServiceTest {
 	@InjectMocks
+	@Autowired
 	UserService userService;
 	
 	@Mock
@@ -118,22 +119,6 @@ public class UserServiceTest {
 			
 			MatcherAssert.assertThat(tmp_user, equalTo(new ResponseEntity<>("User deleted successfully", HttpStatus.OK)));
 			
-		}
-		
-		//GetUsersService
-		//LastOne
-		
-		@Test
-		void getUser_Service() {
-			List<User> catalog = new ArrayList<User>();
-			
-			UserRepository usRepo = mock(UserRepository.class);
-			//this.userService.setUs(usRepo);
-			Mockito.when(usRepo.findAll()).thenReturn(catalog);
-			
-			List<UserDto> tmp_user = userService.getUsers();//Mapping ModelMapper
-			
-			MatcherAssert.assertThat(tmp_user.size(), equalTo(catalog.size()));
 		}
 		
 }
