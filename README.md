@@ -1,4 +1,7 @@
-# BookBorrowing
+# BookBorrowing App
+[App Deployment](http://35.184.94.64)
+
+## UML Diagrams and Documentation
 
 ## Relational Diagram
 ![](./img/2022-02-22-10-53-38.png)
@@ -26,6 +29,8 @@
 ## Trello Board
 https://trello.com/b/avKyN8mS/bookborrowing
 
+![](./img/2022-03-03-17-39-43.png)
+
 
 ## Spring Initializr
 ![](./img/2022-02-18-12-55-50.png)
@@ -49,3 +54,5 @@ https://trello.com/b/avKyN8mS/bookborrowing
 ## Swagger documentation
 - https://app.swaggerhub.com/apis-docs/oscaru21/BookBorrowingAPI/1.0
 - http://localhost:8080/swagger-ui/
+
+
