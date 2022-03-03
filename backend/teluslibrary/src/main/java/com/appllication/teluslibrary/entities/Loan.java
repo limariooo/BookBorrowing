@@ -14,13 +14,16 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
-@Setter
+
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "loan")
 @JsonIgnoreProperties({ "book", "user" })
@@ -43,6 +46,13 @@ public class Loan {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "fk_id_book", nullable = false)
 	private Book book;
+
+	public Loan(Long correlative, LocalDate startDate, String status) {
+		super();
+		this.correlative = correlative;
+		this.startDate = startDate;
+		this.status = status;
+	}
 
 
 

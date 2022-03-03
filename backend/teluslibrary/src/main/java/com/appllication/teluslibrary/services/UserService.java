@@ -10,17 +10,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.appllication.teluslibrary.entities.Loan;
 import com.appllication.teluslibrary.entities.User;
 import com.appllication.teluslibrary.exceptions.ResourceNotFoundException;
 import com.appllication.teluslibrary.payload.CreateUserDto;
 import com.appllication.teluslibrary.payload.LoanDto;
 import com.appllication.teluslibrary.payload.UserDto;
 import com.appllication.teluslibrary.repositories.UserRepository;
-
-import lombok.Getter;
-import lombok.Setter;
-@Setter
-@Getter
+import com.appllication.teluslibrary.util.LoanStatus;
 @Service
 public class UserService {
 	@Autowired
@@ -59,22 +56,10 @@ public class UserService {
 	}
 	
 	private User mapToEntiy(CreateUserDto userDto) {
-		User user = mapper.map(userDto, User.class);
-		return user;
+		return mapper.map(userDto, User.class);
 	}
-	
-	public UserDto mapUserToDto(User user) {
-		UserDto userDto = mapper.map(user, UserDto.class);
-		
-		if(user.getLoans() != null) {
-			userDto.setActiveLoans(loanService.getActiveLoans(user.getLoans()));
-			userDto.setLoans(user.getLoans().stream()
-					.map(loan -> loanService.mapLoanToDto(loan))
-					.collect(Collectors.toList()));
-		}else {
-			userDto.setActiveLoans(0);
-		}
-		return userDto;
+	private UserDto mapUserToDto(User user) {
+		return mapper.map(user, UserDto.class);
 	}
 	
 }
