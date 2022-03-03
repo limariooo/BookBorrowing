@@ -16,7 +16,13 @@ Test
 https://mkyong.com/maven/how-to-run-unit-test-with-maven/
 ./mvnw test
 
+//SSL
+https://mkyong.com/spring-boot/spring-boot-ssl-https-examples/
+https://www.baeldung.com/spring-boot-https-self-signed-certificate
+https://medium.com/quick-code/spring-boot-how-to-secure-rest-api-with-https-54ec8f0e4796
+
 keytool -genkey -keyalg RSA -alias tutorial -keystore tutorial.jks -storepass password -validity 365 -keysize 4096 -storetype pkcs12
 
 //Kill Port
+
 kill -9 $(sudo lsof -t -i:8080)
