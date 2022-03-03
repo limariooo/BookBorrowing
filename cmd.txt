@@ -15,3 +15,8 @@ mvn dependency:resolve
 Test
 https://mkyong.com/maven/how-to-run-unit-test-with-maven/
 ./mvnw test
+
+keytool -genkey -keyalg RSA -alias tutorial -keystore tutorial.jks -storepass password -validity 365 -keysize 4096 -storetype pkcs12
+
+//Kill Port
+kill -9 $(sudo lsof -t -i:8080)
