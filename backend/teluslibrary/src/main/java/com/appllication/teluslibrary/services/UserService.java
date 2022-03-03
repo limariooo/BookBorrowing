@@ -58,7 +58,7 @@ public class UserService {
 	private User mapToEntiy(CreateUserDto userDto) {
 		return mapper.map(userDto, User.class);
 	}
-	private UserDto mapUserToDto(User user) {
+	public UserDto mapUserToDto(User user) {
 		return mapper.map(user, UserDto.class);
 	}
 	

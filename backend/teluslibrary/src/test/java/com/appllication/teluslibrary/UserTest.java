@@ -245,24 +245,7 @@ public class UserTest {
 		MatcherAssert.assertThat(tmp_user, equalTo(new ResponseEntity<>("User deleted successfully", HttpStatus.OK)));
 		
 	}
-	
-	@Test
-	void findById() {
-		User user = userRepository.findById(15L).get();
-		MatcherAssert.assertThat(user.getId(), equalTo(15L));
-	}
-	
-	@Test
-	void save() {
-		User user = new User();
-		user.setFirstName("Saul");
-		user.setLastName("Gimenez");
-		user.setEmail("saul@mail.com");
-		
-		User tmp = userRepository.save(user);
-		MatcherAssert.assertThat(tmp.getEmail(), equalTo("saul@mail.com"));
-	}
-	
+
 	
 	
 	
