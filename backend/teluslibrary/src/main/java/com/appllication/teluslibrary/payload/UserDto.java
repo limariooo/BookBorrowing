@@ -1,19 +1,17 @@
 package com.appllication.teluslibrary.payload;
 
 import java.util.List;
-
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+
 @Data
 public class UserDto {
-	private Long id;
+	public Long id;
+	public String firstName;
+	public String lastName;
+	public String email;
+	public Integer activeLoans;
+	public List<LoanDto> loans;
 	
-	private String firstName;
-	
-	private String lastName;
-	
-	private String email;
-	
-	private Integer activeLoans;
-	
-	private List<LoanDto> loans;
 }

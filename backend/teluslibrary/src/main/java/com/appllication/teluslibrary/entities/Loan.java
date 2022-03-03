@@ -55,4 +55,22 @@ public class Loan {
 	}
 
 
+
+	public Loan(Long correlative, LocalDate startDate, String type, String status, User user, Book book) {
+		super();
+		this.correlative = correlative;
+		this.startDate = startDate;
+		this.type = type;
+		this.status = status;
+		this.user = user;
+		this.book = book;
+	}
+
+	public Loan() {
+		super();
+	}
+	
+	
+
+
 }
